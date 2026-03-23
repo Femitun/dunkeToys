@@ -36,6 +36,32 @@ const createProduct = async (req, res) => {
   }
 };
 
+// Function to fetch all products with their category names
+const getAllProducts = async (req, res) => {
+  try {
+    const queryText = `
+      SELECT 
+        p.id, 
+        p.name, 
+        p.description, 
+        p.category_id, 
+        c.name AS category_name
+      FROM products p
+      JOIN categories c ON p.category_id = c.id
+      ORDER BY p.id ASC;
+    `;
+    
+    const result = await pool.query(queryText);
+
+    res.status(200).json(result.rows);
+    
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
 module.exports = {
   createProduct,
+  getAllProducts,
 };

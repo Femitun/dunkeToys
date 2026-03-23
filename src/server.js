@@ -30,6 +30,12 @@ const categoryRoutes = require('./routes/categoryRoutes');
 // Tell Express to use these routes for anything starting with /api/categories
 app.use('/api/categories', categoryRoutes);
 
+// Import the product routes
+const productRoutes = require('./routes/productRoutes');
+
+// Tell Express to use these routes for anything starting with /api/products
+app.use('/api/products', productRoutes);
+
 // 6. Create a simple test route so we can check it in the browser
 app.get('/', (req, res) => {
   res.send('Mum Store API is running!');
