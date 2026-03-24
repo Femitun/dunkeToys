@@ -36,6 +36,18 @@ const productRoutes = require('./routes/productRoutes');
 // Tell Express to use these routes for anything starting with /api/products
 app.use('/api/products', productRoutes);
 
+// Import the product variant routes
+const productVariantRoutes = require('./routes/productVariantRoutes');
+
+// Tell Express to use these routes for anything starting with /api/variants
+app.use('/api/variants', productVariantRoutes);
+
+// Import the user routes
+const userRoutes = require('./routes/userRoutes');
+
+// Tell Express to use these routes for anything starting with /api/users
+app.use('/api/users', userRoutes);
+
 // 6. Create a simple test route so we can check it in the browser
 app.get('/', (req, res) => {
   res.send('Mum Store API is running!');
