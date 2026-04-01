@@ -99,7 +99,23 @@ const loginUser = async (req, res) => {
   }
 };
 
+const getAllUsers = async (req, res) => {
+  try {
+    // Notice we explicitly list the columns we want, completely ignoring password_hash
+    const queryText = 'SELECT id, email, role, created_at FROM users ORDER BY id ASC;';
+    
+    const result = await pool.query(queryText);
+
+    res.status(200).json(result.rows);
+    
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
 module.exports = {
   registerUser,
   loginUser,
+  getAllUsers,
 };
